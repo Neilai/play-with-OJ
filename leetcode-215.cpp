@@ -22,7 +22,6 @@ public:
 				eq++;
 		}	
 		swap(arr[gt-1],arr[l]);
-		cout<<"index:"<<gt-1<<endl;
 		return gt-1;
 	}
 
@@ -41,7 +40,7 @@ public:
  				}
  				index=partition(nums,l,r);
  			}
- 			cout<<nums[index];
+ 			// cout<<nums[index];
  			return nums[index];
     }
 };
