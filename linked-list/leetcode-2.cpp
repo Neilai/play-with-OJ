@@ -53,13 +53,14 @@ public:
 		  //       }
 		  //       return result;
     // }
+    // 一般来说是把结果结点声明 然后新增结点不断放到next指针后面 最后返回result->next
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2){
     		int carry=0;
     		ListNode *result=new ListNode(0);
     		ListNode *p=result;
     		while(l1||l2){
+    			p->next=new ListNode(0);
     			if(l1&&l2){
-    			   p->next=new ListNode(0);
     			   p->next->val=(l1->val+l2->val+carry)%10;
     			   carry=(l1->val+l2->val+carry)/10;
     			   l1=l1->next;
@@ -77,6 +78,8 @@ public:
     			}
     			p=p->next;
     		}
+    		if(carry==1)
+    			p->next=new ListNode(1);
     		return result->next;
     }
 };
