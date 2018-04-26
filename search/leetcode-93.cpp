@@ -4,6 +4,7 @@
 #include <cassert>
 #include <cstdlib>
 using namespace std;
+// 搜索  注意搜索状态需要相互隔离
 class Solution {
 public:
 	vector<string> res;
