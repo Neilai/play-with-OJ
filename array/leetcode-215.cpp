@@ -6,23 +6,22 @@ using namespace std;
 class Solution {
 public:
 	int partition(vector<int>& arr,int l,int r){
-		int lt=r, eq=l+1,gt=l+1;
+		int gt=r+1,eq=l,lt=l;
 		srand(time(NULL));
 		swap(arr[l],arr[rand()%(r-l+1)+l]);
-		while(eq<=lt){
+		while(eq<gt){
+			eq++;
 			if(arr[eq]<arr[l]){
-				swap(arr[lt],arr[eq]);
-				lt--;
+				swap(arr[lt+1],arr[eq]);
 			}
 			else if(arr[eq]>arr[l]){
-				swap(arr[eq],arr[gt]);
-				eq++;gt++;
+				swap(arr[eq],arr[gt-1]);
 			}
 			else
 				eq++;
 		}	
-		swap(arr[gt-1],arr[l]);
-		return gt-1;
+		swap(arr[lt],arr[l]);
+		return lt;
 	}
 
 
@@ -45,10 +44,11 @@ public:
     }
 };
 
+
 int main(){
 	Solution s;
 	std::vector<int> v;
 	v.push_back(1),v.push_back(9),v.push_back(2),v.push_back(5),v.push_back(3),v.push_back(11);
-	s.partition(v,0,v.size()-1);
-	s.findKthLargest(v,5);
+	// cout<<s.partition(v,0,v.size()-1);
+	cout<<s.findKthLargest(v,5);
 }

@@ -14,21 +14,25 @@ public:
         int map[256]={0};
         int l=0,r=-1;
         int res=0;
-        while(r<s.size()){	
-        	if(!map[int(s[r])]){
-        		res=max(res,r-l+1);
-        		map[int(s[r])]=1;
-        		r++;
-        	}
-        	else {
-        		map[int(s[l])]=0;
-        		l++;
-        	}
+        while(r<int(s.size())-1){
+            if(!map[int(s[r+1])]){
+                r++;
+                res=max(res,r-l+1);
+                map[int(s[r])]++;    
+            }
+            else {
+                cout<<"r "<<r<<endl;
+                while(map[int(s[r+1])]){
+                    map[int(s[l])]--;
+                    l++;
+                    cout<<"l "<<l<<endl;
+                }    
+            }
         }
         return res;
     }
 };
 int main(){
 	Solution s;
-	cout<<s.lengthOfLongestSubstring("");		
+	cout<<s.lengthOfLongestSubstring("dvdf");		
 }
