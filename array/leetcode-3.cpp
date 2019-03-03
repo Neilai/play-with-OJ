@@ -21,11 +21,9 @@ public:
                 map[int(s[r])]++;    
             }
             else {
-                cout<<"r "<<r<<endl;
                 while(map[int(s[r+1])]){
                     map[int(s[l])]--;
                     l++;
-                    cout<<"l "<<l<<endl;
                 }    
             }
         }

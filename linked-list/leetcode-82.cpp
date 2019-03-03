@@ -65,6 +65,7 @@ public:
         return dummy->next;
     }
 };
+
 int main(){
 	ListNode *x=new ListNode(1);
 	ListNode *y=new ListNode(2);

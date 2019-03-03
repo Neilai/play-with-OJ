@@ -22,6 +22,7 @@ public:
         	cur->next=pre;
         	pre=cur;
         	cur=tmp;
+            
         }
         return pre;
     }
