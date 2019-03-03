@@ -16,22 +16,38 @@ public:
         ListNode * cur=head;
         while(cur){
         	if(cur->val<x){
-	        	ListNode *newNode=new ListNode(cur->val);
-	        	
-	        	plt->next=newNode;
+	        	plt->next=cur;
 	        	plt=plt->next;
         	}else{
-	        	ListNode *newNode=new ListNode(cur->val);
-	        	newNode->val=cur->val;
-	        	pgt->next=newNode;
+	        	pgt->next=cur;
 	        	pgt=pgt->next;
 	        }	
 	        cur=cur->next;
         }
         plt->next=gt.next;
+        pgt->next=NULL;
         return lt.next;
     }
 };
 int main(){
 
 }
+
+
+// class Solution {
+// public:
+//     ListNode* partition(ListNode* head, int x) {
+//         ListNode left(0), right(0);
+//         ListNode *l = &left, *r = &right;
+
+//         while(head){
+//             ListNode* & ref = head->val < x ? l : r;
+//             ref->next = head;
+//             ref = ref->next;
+//             head = head->next;
+//         }
+//         l->next = right.next;
+//         r->next = NULL;
+//         return left.next;
+//     }
+// };
