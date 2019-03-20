@@ -41,7 +41,7 @@ public:
    		ListNode* dummyHead = new ListNode(0);
         dummyHead->next = head;
 
-        ListNode* cur = dummyHead;
+        ListNode* p = dummyHead;
         while(cur->next&&cur->next->next){
         	ListNode* node1 = p->next;
             ListNode* node2 = node1->next;

@@ -9,14 +9,16 @@ struct ListNode {
 class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
+    	if(!head) return head;
     	ListNode * oddptr=head, *evenptr=head->next;
+    	ListNode * headeven=head->next;
     	while(evenptr&&evenptr->next){
     		oddptr->next=evenptr->next;
     		oddptr=oddptr->next;
     		evenptr->next=oddptr->next;
     		evenptr=evenptr->next;
     	}
-    	oddptr->next=evenptr;
+    	oddptr->next=headeven;
         return head;
     }
 };

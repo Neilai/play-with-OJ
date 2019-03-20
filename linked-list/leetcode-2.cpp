@@ -1,5 +1,4 @@
 #include<iostream>
-#include<stack>
 using namespace std;
 
   struct ListNode {
@@ -59,24 +58,12 @@ public:
     		ListNode *result=new ListNode(0);
     		ListNode *p=result;
     		while(l1||l2){
-    			p->next=new ListNode(0);
-    			if(l1&&l2){
-    			   p->next->val=(l1->val+l2->val+carry)%10;
-    			   carry=(l1->val+l2->val+carry)/10;
-    			   l1=l1->next;
-    			   l2=l2->next;
-    			}
-    			else if(l1&&!l2){
-    				p->next->val=(l1->val+carry)%10;
-    				carry=(l1->val+carry)/10;
-    				l1=l1->next;
-    			}
-    			else{
-    				p->next->val=(l2->val+carry)%10;
-    				carry=(l2->val+carry)/10;
-    				l2=l2->next;
-    			}
-    			p=p->next;
+    			int sum=(l1 ? l1->val : 0) + (l2 ? l2->val : 0) + extra;
+    			p->next = new ListNode(sum%10);
+    			carry = sum/10;
+    			p  = p->next;
+		        l1 = l1 ? l1->next : l1;
+		        l2 = l2 ? l2->next : l2;
     		}
     		if(carry==1)
     			p->next=new ListNode(1);
@@ -85,4 +72,20 @@ public:
 };
 int main(){
 	return 1;
+}
+
+
+
+ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
+    ListNode preHead(0), *p = &preHead;
+    int extra = 0;
+    while (l1 || l2 || extra) {
+        int sum = (l1 ? l1->val : 0) + (l2 ? l2->val : 0) + extra;
+        extra = sum / 10;
+        p->next = new ListNode(sum % 10);
+        p = p->next;
+        l1 = l1 ? l1->next : l1;
+        l2 = l2 ? l2->next : l2;
+    }
+    return preHead.next;
 }
