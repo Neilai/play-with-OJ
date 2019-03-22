@@ -33,7 +33,6 @@ public:
     			cout<<res[i][j];
     		cout<<endl;
     	}
-
     	return res;
     }
 };
