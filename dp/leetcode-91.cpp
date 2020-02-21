@@ -1,44 +1,57 @@
-#include<iostream>
-#include<vector>
-#include<string>
-#include<cstdlib>
-// 这题 题意不清 太坑了
+#include <iostream>
+#include <vector>
+#include <string>
+#include <cstdlib>
+
+// 这题 题意要考虑0, 太坑了
+
 using namespace std;
-class Solution {
+class Solution
+{
 public:
-    int numDecodings(string s) {
-    	if(!s.size()||s[0]=='0')
-    		return 0;
-    	int n=s.size();
-    	int dp[n];
-    	int pos=n;
-    	for(int i=0;i<n;i++){
-    		dp[i]=1;
-    	}
-    	for(int i=1;i<pos;i++){    		
-    		int tmp=(int(s[i-1])-48)*10+int(s[i])-48;	
-    		if(tmp>=1&&tmp<=26)
-    			if(i-2>=0&&s[i]!='0')
-    				dp[i]=max(dp[i],dp[i-2]+2);
-    			else if (i-2>=0&&s[i]=='0')
-    				dp[i]=max(dp[i],dp[i-2]+1);
-    			else if (s[i]!='0')
-    				dp[i]=2;
-    			else
-    				dp[i]=1;
-    		else if(s[i]=='0'){
-    			pos=i;break;
-    		}        		
-    		dp[i]=max(dp[i],dp[i-1]);
-    	}
-    	return dp[pos-1];
-    }
+	vector<int> memo;
+	int findWay(string s, int index)
+	{
+		if (memo[index] != -1)
+			return memo[index];
+		if (s[index] == '0')
+			return 0;
+		if (index >= s.size() - 1)
+			return 1;
+		if (index <= s.size() - 2 && stoi(s.substr(index, 2)) <= 26)
+			return memo[index] = findWay(s, index + 2) + findWay(s, index + 1);
+		else
+			return memo[index] = findWay(s, index + 1);
+	}
+	int numDecodings(string s)
+	{
+		memo = vector<int>(s.size() + 1, -1);
+		return findWay(s, 0);
+	}
+	int numDecodings_dp(string s)
+	{
+		int n = s.size();
+		vector<int> dp(n + 1);
+		dp[n] = 1;
+		for (int i = n - 1; i >= 0; i--)
+		{
+			if (s[i] == '0')
+				dp[i] = 0;
+			else
+			{
+				dp[i] = dp[i + 1];
+				if (i < n - 1 && (s[i] == '1' || s[i] == '2' && s[i + 1] < '7'))
+					dp[i] += dp[i + 2];
+			}
+		}
+		return s.empty() ? 0 : dp[0];
+	}
 };
-    
-int main(){
+
+int main()
+{
 	Solution s;
-	// string s="12";
-	// cout<<int(s[0]);
-	// cout<<atoi("1");
-	cout<<s.numDecodings("100");
+	string str = "100";
+	cout << s.numDecodings(str);
 }
+
