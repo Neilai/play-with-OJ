@@ -1,48 +1,37 @@
-class Solution {
+let arr=[
+    [1,1,0,1],
+    [1,0,0,1],
+    [0,1,0,1],
+    [0,1,0,1]
+]
+let visited=[
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0],
+    [0,0,0,0]
+]
 
-private:
-    int d[4][2] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
-    int m, n;
-    vector<vector<bool>> visited;
-
-    bool inArea(int x, int y){
-        return x >= 0 && x < m && y >= 0 && y < n;
-    }
-
-    void dfs(vector<vector<char>>& grid, int x, int y){
-
-        //assert(inArea(x,y));
-        visited[x][y] = true;
-        for(int i = 0; i < 4; i ++){
-            int newx = x + d[i][0];
-            int newy = y + d[i][1];
-            if(inArea(newx, newy) && !visited[newx][newy] && grid[newx][newy] == '1')
-                dfs(grid, newx, newy);
+let cnt=0
+function search(map){
+    for(let i=0;i<map.length;i++)
+        for(let j=0;i<map[0].length;j++){
+            if(!visited[i][j]&&map[i][j]!=0){
+                dfs(i,j);
+                cnt++; 
+                console.log("!!!")
+            }             
         }
-
-        return;
-    }
-
-public:
-    int numIslands(vector<vector<char>>& grid) {
-
-        m = grid.size();
-        if(m == 0)
-            return 0;
-        n = grid[0].size();
-        if(n == 0)
-            return 0;
-
-        for(int i = 0 ; i < m ; i ++)
-            visited.push_back(vector<bool>(n, false));
-
-        int res = 0;
-        for(int i = 0 ; i < m ; i ++)
-            for(int j = 0 ; j < n ; j ++)
-                if(grid[i][j] == '1' && !visited[i][j]){
-                    dfs(grid, i, j);
-                    res ++;
-                }
-        return res;
-    }
-};
+}
+function dfs(i,j){
+    visited[i][j]=1; 
+    if(i-1>=0&&!visited[i-1][j]&&arr[i-1][j]!=0)
+        dfs(i-1,j);
+    if(i+1<4&&!visited[i+1][j]&&arr[i+1][j]!=0)
+        dfs(i+1,j);
+    if(j+1<4&&!visited[i][j+1]&&arr[i][j+1]!=0)
+        dfs(i,j+1);
+    if(j-1>=0&&!visited[i][j-1]&&arr[i][j-1]!=0)
+        dfs(i,j-1);
+}
+search(arr)
+console.log(cnt)

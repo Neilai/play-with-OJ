@@ -20,7 +20,6 @@ public:
     	return grid[grid.size()-1][grid[grid.size()-1].size()-1];
         
     }
-    intsdsdsdsdasdksdsadsdklklk;lk;lklklklklk
 };
 int main(){
 	Solution a;
